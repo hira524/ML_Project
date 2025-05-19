@@ -1,10 +1,7 @@
-# ml_pipeline.py
-
 import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from pathlib import Path
 from collections import Counter
 
 from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler
@@ -29,11 +26,9 @@ from tensorflow.keras.layers import Input, Dense
 
 
 # === Dataset Paths ===
-DATA_DIR = Path(__file__).parent / "data"
-
-DATA_PATH_1 = DATA_DIR / "D1 adult census income data.csv"
-DATA_PATH_2 = DATA_DIR / "D2 Predictive Maintenance Dataset (AI4I 2020).csv"
-DATA_PATH_3 = DATA_DIR / "D3 Ames Housing Dataset.csv"
+DATA_PATH_1 = r"C:\Users\Syeda Hira\OneDrive\Documents\hi\ML_Project\D1\D1_adult_cencus_income_data.csv"
+DATA_PATH_2 = r"C:\Users\Syeda Hira\OneDrive\Documents\hi\ML_Project\S2\ai4i2020.csv"
+DATA_PATH_3 = r"C:\Users\Syeda Hira\OneDrive\Documents\hi\ML_Project\D3\AmesHousing.csv"
 
 
 # === Utility Functions ===
@@ -63,7 +58,7 @@ def evaluate_model_with_heatmap(model, X_test, y_test, labels, title=""):
 
 # === Dataset 1: Adult Census ===
 def process_adult_dataset():
-    print(f"Loading dataset from: {DATA_PATH_1.resolve()}")
+    print(f"Loading dataset from: {DATA_PATH_1}")
     df = pd.read_csv(DATA_PATH_1)
 
     df.replace('?', np.nan, inplace=True)
@@ -134,7 +129,7 @@ def train_classifiers(X, y, name=""):
 
 # === Dataset 2: Predictive Maintenance ===
 def process_predictive_maintenance():
-    print(f"Loading dataset from: {DATA_PATH_2.resolve()}")
+    print(f"Loading dataset from: {DATA_PATH_2}")
     df = pd.read_csv(DATA_PATH_2)
     df = df.drop(columns=[col for col in ['UDI', 'Product ID'] if col in df.columns])
 
@@ -176,7 +171,7 @@ def feature_extraction_autoencoder(X_train, X_test):
 
 # === Dataset 3: Ames Housing ===
 def process_ames_dataset():
-    print(f"Loading dataset from: {DATA_PATH_3.resolve()}")
+    print(f"Loading dataset from: {DATA_PATH_3}")
     df = pd.read_csv(DATA_PATH_3)
     df = df.dropna(subset=['SalePrice'])
 
