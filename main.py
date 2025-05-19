@@ -225,3 +225,5 @@ if __name__ == "__main__":
     X_res_rus, y_res_rus = rus.fit_resample(X_train_ames, y_train_ames)
     clf_rus = RandomForestClassifier().fit(X_res_rus, y_res_rus)
     evaluate_model_with_heatmap(clf_rus, X_test_ames, y_test_ames, ["Low", "Medium", "High"], "Undersampling")
+
+
