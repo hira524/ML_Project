@@ -11,7 +11,7 @@ from sklearn.metrics import (accuracy_score, precision_score, recall_score,
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans, DBSCAN
 from sklearn.feature_selection import SelectKBest, chi2
-from sklearn.metrics import silhouette_score  # You missed this import
+from sklearn.metrics import silhouette_score
 
 from sklearn.ensemble import (RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier)
 from sklearn.linear_model import LogisticRegression
@@ -91,7 +91,13 @@ def clustering_validation(X):
 
     dbscan = DBSCAN(eps=2, min_samples=5)
     dbscan_labels = dbscan.fit_predict(X)
-    print("DBSCAN Silhouette Score:", silhouette_score(X, dbscan_labels))
+
+    unique_labels = set(dbscan_labels)
+    # Silhouette score requires at least 2 clusters (labels) and less than n_samples clusters
+    if len(unique_labels) > 1 and len(unique_labels) < len(X):
+        print("DBSCAN Silhouette Score:", silhouette_score(X, dbscan_labels))
+    else:
+        print("DBSCAN produced only one cluster or all points are noise — silhouette score not defined.")
 
 
 def balance_data(X, y):
